@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { fetchEntries } from '@utils/contentfulPosts'
+import { fetchEntries } from '@utils/fetchFromServer'
 
 import Header from '@components/Header'
 import Footer from '@components/Footer'
