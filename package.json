@@ -1,0 +1,17 @@
+{
+  "name": "whats-for-dinner",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
+  },
+  "dependencies": {
+    "contentful": "^7.14.6",
+    "next": "9.5.0",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  }
+}
