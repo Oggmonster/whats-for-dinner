@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
-import { fetchEntries } from '@utils/fetchFromServer'
+import { fetchEntries } from '@utils/fetchFromServer';
+import Link from 'next/link';
 
 import Header from '@components/Header'
 import Footer from '@components/Footer'
@@ -16,6 +17,9 @@ export default function Home({ posts }) {
 
       <main>
         <Header />
+        <div>
+        <Link href={`/food-planner`}>Planera matschema</Link>
+        </div>
         <div className="posts">
           {posts.map((p) => {
             return <Post key={p.name} name={p.name} ingredients={p.ingredients} />
@@ -23,45 +27,7 @@ export default function Home({ posts }) {
         </div>
       </main>
 
-      <Footer />
-
-      <style jsx>{`
-        .container {
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        main {
-          padding: 5rem 0;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        .posts {
-          display: flex;
-          margin-right: 10px;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
-            Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
+      <Footer />      
     </div>
   )
 }

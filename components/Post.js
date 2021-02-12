@@ -6,12 +6,7 @@ function Post({ name, ingredients }) {
         <ul>
           {ingredients.map(i => <li key={i}>{i}</li>)}
         </ul>
-      </div>      
-      <style jsx>{`
-        .post {
-          margin-right: 20px;
-        }
-      `}</style>
+      </div>
     </div>    
   )
 }

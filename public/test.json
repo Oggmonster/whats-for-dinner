@@ -1,0 +1,48 @@
+[
+  {
+    "sys": {
+      "space": {
+        "sys": { "type": "Link", "linkType": "Space", "id": "uhykc6bxauz1" }
+      },
+      "id": "GBk9SMlEyWDeeTFrqNDly",
+      "type": "Entry",
+      "createdAt": "2021-02-10T11:46:29.912Z",
+      "updatedAt": "2021-02-10T11:46:29.912Z",
+      "environment": {
+        "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": { "type": "Link", "linkType": "ContentType", "id": "dish" }
+      },
+      "locale": "en-US"
+    },
+    "fields": {
+      "name": "Lax och potatis",
+      "ingredients": ["Lax", "Potatis", "Rom", "Creame fraiche"]
+    }
+  },
+  {
+    "sys": {
+      "space": {
+        "sys": { "type": "Link", "linkType": "Space", "id": "uhykc6bxauz1" }
+      },
+      "id": "46kl9xvYZMUYH5KdsV3FHJ",
+      "type": "Entry",
+      "createdAt": "2021-02-10T11:37:48.873Z",
+      "updatedAt": "2021-02-10T11:37:48.873Z",
+      "environment": {
+        "sys": { "id": "master", "type": "Link", "linkType": "Environment" }
+      },
+      "revision": 1,
+      "contentType": {
+        "sys": { "type": "Link", "linkType": "ContentType", "id": "dish" }
+      },
+      "locale": "en-US"
+    },
+    "fields": {
+      "name": "Köttbullar och stuvade makaroner",
+      "ingredients": ["Köttbullar", "Makaroner", "Mjölk", "Mjöl"]
+    }
+  }
+]
