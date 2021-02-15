@@ -1,3 +1,3 @@
 export default function Header() {
-  return <h1 className="title">What's for dinner?</h1>
+  return <h1 className="title text-lg font-bold">Vad blir det för mat?</h1>
 }

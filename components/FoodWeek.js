@@ -61,24 +61,20 @@ export default function FoodWeek({dishes, onSave}) {
 
   return (
     <>
-      <div>
-        <label for="week-name" className="sr-only">Vad vill du kalla veckan?</label>
-        <input id="week-name" name="name" value={foodWeek.name} onChange={handleChange} type="text" className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Veckonamn" />
-      </div>
+      <div className="container w-3/12 px-2 py-2">
+        <div className="text-sm text-gray-900 py-1 font-bold">Namnge veckan</div>        
+        <input id="week-name" name="name" value={foodWeek.name} onChange={handleChange} type="text" className="rounded-sm shadow-sm px-4 py-2 border border-gray-200 w-full mt-4" placeholder="Veckonamn" />
+      </div>      
+      {/* <button onClick={handleSurprise}>Överraska mig</button> */}     
       
-      <button onClick={handleSurprise}>Överraska mig</button>
-      
-      <button onClick={handleSave}>Spara</button>
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div className="text-sm text-gray-900 py-2 px-2 font-bold">Välj rätter</div>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
-                  <tr>
-                    <th scope="col" className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Dag
-                    </th>
+                  <tr>                   
                     <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Lunch
                     </th>
@@ -90,11 +86,9 @@ export default function FoodWeek({dishes, onSave}) {
                 <tbody className="bg-white divide-y divide-gray-200">
                 {days.map(d => {        
                   return (
-                  <tr key={d.value}>
-                    <td className="px-2 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{d.label}</div>                        
-                    </td>
+                  <tr key={d.value}>                   
                     <td className="px-4 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{d.label} lunch</div>   
                       <Select 
                         value={foodWeek[d.value + '_lunch']}
                         onChange={(val) => handleSelect({name: d.value + '_lunch', value: val })}
@@ -103,17 +97,19 @@ export default function FoodWeek({dishes, onSave}) {
                       />
                     </td>
                     <td className="px-4 py-4 whitespace-nowrap">
-                     <Select 
-                      value={foodWeek[d.value + '_dinner']}
-                      onChange={(val) => handleSelect({name: d.value + '_dinner', value: val })}
-                      options={dishOptions}
-                      placeholder="Välj rätt"
-                    />  
+                      <div className="text-sm text-gray-900">{d.label} middag</div>   
+                      <Select 
+                        value={foodWeek[d.value + '_dinner']}
+                        onChange={(val) => handleSelect({name: d.value + '_dinner', value: val })}
+                        options={dishOptions}
+                        placeholder="Välj rätt"
+                      />  
                     </td>
                   </tr>);
                 })}
                 </tbody>
               </table>
+              <button onClick={handleSave}>Spara</button>
             </div>
           </div>
         </div>

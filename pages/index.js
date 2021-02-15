@@ -1,13 +1,12 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import { fetchEntries } from '@utils/fetchFromServer';
-import Link from 'next/link';
+import { fetchEntries } from "@utils/fetchFromServer";
+import Link from "next/link";
 
-import Header from '@components/Header'
-import Footer from '@components/Footer'
-import Post from '@components/Post'
+import Header from "@components/Header";
+import Footer from "@components/Footer";
 
-export default function Home({ posts }) {
+export default function Home() {
   return (
     <div className="container">
       <Head>
@@ -16,32 +15,14 @@ export default function Home({ posts }) {
       </Head>
 
       <main>
-        <Header />
-        <div>
-        <Link href={`/food-planner`}>Planera matschema</Link>
-        </div>
-        <div className="posts">
-          {posts.map((p) => {
-            return <Post key={p.name} name={p.name} ingredients={p.ingredients} />
-          })}
+        <div className="container px-3 max-w-md mx-auto">
+          <Header />
+          <div className="flex flex-col">
+            <Link href={`/food-planner`}>Planera matschema</Link>
+            <Link href={`/shopping-list`}>Inköpslista</Link>
+          </div>
         </div>
       </main>
-
-      <Footer />      
     </div>
-  )
-}
-
-export async function getStaticProps() {
-  const res = await fetchEntries();
-  console.log('res', res);
-  const posts = await res.map((p) => {
-    return p.fields
-  })
-
-  return {
-    props: {
-      posts,
-    },
-  }
+  );
 }
