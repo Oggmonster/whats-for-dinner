@@ -2,10 +2,21 @@
 //lägga till fler items
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
+import { getEntry, updateEntry } from "@utils/contentfulService";
+
+const shoppingListId = '3ILfSiNkSomyMSBksia4Iz';
 
 export default function ShoppingList() {
   const [items, setItems] = useState([]);
   const [taskText, setTaskText] = useState('');
+
+  useEffect(() => {
+    const fetchList = async () => {
+      const list = await getEntry(shoppingListId);
+      setItems(list.items);
+    };
+    fetchList();
+  }, []);
 
   const handleChange = (ev) => {
     setTaskText(ev.target.value);
@@ -48,6 +59,13 @@ export default function ShoppingList() {
     setItems(newItems);
   };
 
+  const saveChanges = async () => {
+    const result = await updateEntry(shoppingListId, { 
+      title: 'Inköpslistan',
+      items: items,  
+    });
+  };
+
   return (
     <div className="container">
       <Head>
@@ -67,11 +85,12 @@ export default function ShoppingList() {
               onKeyUp={addItem}
             />
             <div className="text-sm mt-2">{items.filter(i => !i.isDone).length} varor kvar att handla</div>
+            <button onClick={saveChanges}>Spara</button>
 
             <ul className="todo-list mt-4">
               {items.map((item, i) => {
                 return (
-                  <li className="flex justify-between items-center mt-3">
+                  <li key={i} className="flex justify-between items-center mt-3">
                     <div className={item.isDone ? 'flex items-center line-through text-gray-400': 'flex items-center'}>                      
                       <div className="capitalize ml-3 text-sm font-semibold" onClick={() => isDone(i)}>
                         {item.text}
@@ -79,7 +98,7 @@ export default function ShoppingList() {
                     </div>
                     <div>
                       <button onClick={() => removeItem(i)}>
-                        <svg className=" w-4 h-4 text-gray-600 fill-current" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className=" w-4 h-4 text-gray-600 fill-current" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                           <path d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                       </button>
