@@ -28,6 +28,15 @@ export async function getEntry(entryId) {
   return { ...mapFieldsToData(result.fields), id: result.sys.id };
 };
 
+export async function getEntries(query) {
+  const result = await client.getSpace(spaceId)
+    .then((space) => space.getEnvironment('master'))
+    .then((environment) => environment.getEntries(query));
+    
+  return result.items.map((p) => {
+    return { ...mapFieldsToData(p.fields), id: p.sys.id };
+  });
+};
 
 export async function addEntry(contentType, data) {
   const result = client.getSpace(spaceId)

@@ -11,17 +11,21 @@ const days = [
   { value: 'sunday', label: 'söndag', color: 'EA3B46' },
 ];
 
-export default function FoodWeek({dishes, onSave}) {
+export default function FoodWeek({dishes, existingWeek, onSave}) {
 
   const getInitialFoodWeek = () => {
+    console.log('existing', existingWeek);
+    if (existingWeek !== null) {
+      return existingWeek;
+    }
     const week = {
-      id: new Date().toISOString(),
       name: '',
       isActive: false,
+      days: {},
     };
     days.forEach(d => {
-      week[d.value + '_lunch'] = 'valfritt';
-      week[d.value + '_dinner'] = '';
+      week.days[d.value + '_lunch'] = 'valfritt';
+      week.days[d.value + '_dinner'] = '';
     });
     return week;
   };
@@ -29,7 +33,7 @@ export default function FoodWeek({dishes, onSave}) {
   const [foodWeek, setFoodWeek] = useState(getInitialFoodWeek());
 
   const handleSelect = (value) => {
-    setFoodWeek({...foodWeek, [value.name]: value.value});
+    setFoodWeek({...foodWeek, days: { ...foodWeek.days, [value.name]: value.value }});
   }; 
 
   const handleChange = (ev) => {
@@ -39,24 +43,6 @@ export default function FoodWeek({dishes, onSave}) {
 
   const handleSave = () => {
     onSave(foodWeek);
-  };
-
-  const getRandomDish = (i) => {
-    if (i%2 === 0) {
-      return 'Bea';
-    }
-    return 'Pasta';
-  };
-
-  const handleSurprise = () => {
-    const week = {
-      name: foodWeek.name
-    };
-    days.forEach((d,i) => {
-      week[d.value + '_lunch'] = getRandomDish(i);
-      week[d.value + '_dinner'] = getRandomDish(i);
-    });
-    setFoodWeek(week);   
   };
 
   return (
@@ -75,7 +61,7 @@ export default function FoodWeek({dishes, onSave}) {
                       <div className="text-lg font-bold text-gray-900 py-2">{d.label}</div> 
                       <div className="text-sm text-gray-900 font-bold">lunch</div>     
                       <Select 
-                        value={foodWeek[d.value + '_lunch']}
+                        value={foodWeek.days[d.value + '_lunch']}
                         onChange={(val) => handleSelect({name: d.value + '_lunch', value: val })}
                         options={dishOptions}
                         placeholder="Välj rätt"
@@ -84,7 +70,7 @@ export default function FoodWeek({dishes, onSave}) {
                     <div className="px-4 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900 font-bold">middag</div>   
                       <Select 
-                        value={foodWeek[d.value + '_dinner']}
+                        value={foodWeek.days[d.value + '_dinner']}
                         onChange={(val) => handleSelect({name: d.value + '_dinner', value: val })}
                         options={dishOptions}
                         placeholder="Välj rätt"
@@ -93,9 +79,13 @@ export default function FoodWeek({dishes, onSave}) {
                   </div>);
       })}        
       </div>
-      <div>
-        <button className="py-2" onClick={handleSave}>Spara</button>
-      </div>
+      <button
+        type="button"
+        onClick={() => handleSave()}
+        className="border border-indigo-500 my-4 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
+      >
+        Spara
+      </button>     
     </>    
   )
 }
