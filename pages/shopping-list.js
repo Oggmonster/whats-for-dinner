@@ -1,6 +1,7 @@
 //läs in veckans rätter
 //lägga till fler items
 import Head from "next/head";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { getEntry, updateEntry } from "@utils/contentfulService";
 import autoprefixer from "autoprefixer";
@@ -62,6 +63,12 @@ export default function ShoppingList() {
     setItems(newItems);
   };
 
+  const emptyList = () => {
+    if (confirm("Är du söker på att du vill tömma inköpslistan?")) {
+      setItems([]);
+    }
+  };
+
   const saveChanges = async () => {
     setIsLoading(true);
     const result = await updateEntry(shoppingListId, {
@@ -78,11 +85,16 @@ export default function ShoppingList() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="container px-3 max-w-md mx-auto">
+        <div className="container px-3 py-3 max-w-md mx-auto">
+          <div className="flex flex-row justify-evenly">
+            <Link href={`/`}>Start</Link>
+            <Link href={`/food-planner`}>Planera matschema</Link>
+          </div>
           <div className="bg-white rounded shadow px-4 py-4">
             <h3 className="title font-bold text-lg">
               Inköpslista {isLoading && <span>...jobbar...</span>}
             </h3>
+
             <input
               type="text"
               placeholder="skriv in varor som ska handlas"
@@ -98,7 +110,7 @@ export default function ShoppingList() {
 
               <button
                 type="button"
-                style={{marginLeft: 'auto'}}
+                style={{ marginLeft: "auto" }}
                 onClick={() => saveChanges()}
                 className="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
               >
@@ -146,6 +158,13 @@ export default function ShoppingList() {
                 );
               })}
             </ul>
+            <button
+              type="button"
+              onClick={() => emptyList()}
+              className="border border-red-500 bg-red-500 text-white rounded-md px-4 py-2 m-4 transition duration-500 ease select-none hover:bg-red-600 focus:outline-none focus:shadow-outline"
+            >
+              TÖM HELA LISTAN
+            </button>
           </div>
         </div>
       </main>

@@ -1,6 +1,8 @@
 import Head from "next/head";
 import React, { useState, useEffect } from "react";
 
+import Link from "next/link";
+
 import FoodWeek from "@components/FoodWeek";
 import Schedule from "@components/Schedule";
 import { getEntry, getEntries, updateEntry, addEntry } from "@utils/contentfulService";
@@ -93,13 +95,17 @@ export default function FoodPlanner() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="container px-3 mx-auto">
-          <h3 className="title font-bold text-lg">Matschema</h3>
+        <div className="container px-3 py-3 max-w-md mx-auto">
+        <div className="flex flex-row justify-evenly">
+            <Link href={`/`}>Start</Link>
+            <Link href={`/shopping-list`}>Inköpslista</Link>
+          </div>
+          <h3 className="title font-bold text-lg m-2">Matschema</h3>
 
           <button
             type="button"
             onClick={handleEditMode}
-            className="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            className="border border-indigo-500 bg-indigo-500 text-white rounded-md px-4 py-2 m-2 transition duration-500 ease select-none hover:bg-indigo-600 focus:outline-none focus:shadow-outline"
           >
             {isEditMode ? "Stäng" : "Lägg till matvecka"}
           </button>
